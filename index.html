@@ -144,6 +144,14 @@
   .card h3 { font: 600 17px/1.35 var(--sans); margin: 0 0 4px; }
   .card p { margin: 0; color: var(--muted); font-size: 15px; }
 
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .proj h3 a { color: var(--text); }
+  .proj h3 a::after { content: " ↗"; color: var(--faint); font-weight: 400; }
+  .proj .meta { font: 12px/1.6 var(--mono); color: var(--accent); margin: 0 0 8px; }
+  .proj p:last-child { font-size: 14.5px; }
+  .skills { display: grid; grid-template-columns: 170px 1fr; gap: 12px 24px; margin: 0; }
+  .skills dt { font: 13px/1.75 var(--mono); color: var(--faint); }
+  .skills dd { margin: 0; color: var(--muted); }
   .resume-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
   .resume-row p { margin: 0; color: var(--muted); }
 
@@ -156,7 +164,9 @@
     .term-btn { margin-left: auto; }
     .hero { padding-top: 48px; }
     .job { grid-template-columns: 1fr; gap: 2px; }
-    .edu { grid-template-columns: 1fr; }
+    .edu, .grid { grid-template-columns: 1fr; }
+    .skills { grid-template-columns: 1fr; gap: 2px; }
+    .skills dd { margin-bottom: 12px; }
   }
 
   /* terminal overlay */
@@ -214,6 +224,8 @@
     <nav>
       <a href="#experience">experience</a>
       <a href="#education">education</a>
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
       <a href="#resume">resume</a>
     </nav>
     <button class="term-btn" id="openTerm" title="Open terminal (press `)" aria-label="Open terminal mode">&gt;_</button>
@@ -259,8 +271,10 @@
       <div>
         <h3>Algorithm Engineer, Wearable Sensing <span class="org">· STRIV</span></h3>
         <ul>
-          <li>Signal-processing, statistical and machine-learning methods that turn multivariate pressure and motion time series into running metrics and insights.</li>
-          <li>Own the algorithm lifecycle — from exploratory analysis and offline validation to backend implementation and production monitoring.</li>
+          <li>Develop signal-processing, statistical and machine-learning methods for multivariate pressure and motion time series, turning raw wearable signals into user-facing running metrics and insights.</li>
+          <li>Define and validate biomechanics metrics on real-world runs and reference data, checking reliability across runners, running conditions and levels of sensor data quality.</li>
+          <li>Own the algorithm lifecycle — from data ingestion and exploratory analysis through prototyping, offline evaluation, backend implementation and production monitoring.</li>
+          <li>Work across biomechanics, product, mobile and backend engineering to turn research ideas into reliable production features.</li>
         </ul>
       </div>
     </div>
@@ -270,8 +284,10 @@
       <div>
         <h3>Machine Learning Researcher <span class="org">· Beth Israel Deaconess Medical Center</span></h3>
         <ul>
-          <li>Multimodal risk-stratification models combining EEG features, imaging, clinical variables and clinical notes, improving enrichment for anti-epileptogenic drug-trial enrollment by ~50% over random selection.</li>
-          <li>Survival and competing-risks workflows in R and Python; NLP over clinical notes for cohort construction.</li>
+          <li>Built multimodal risk-stratification models combining EEG time-series features, imaging findings, clinical variables and unstructured notes, improving enrichment for anti-epileptogenic drug-trial enrollment by ~50% over random selection.</li>
+          <li>Wrote reproducible R and Python workflows for survival analysis, competing-risks modeling, stratified train–test evaluation and cross-validation across baseline, imaging, EEG and combined model tiers.</li>
+          <li>Applied NLP to electronic medical records and clinical notes to extract outcomes and structured variables for cohort construction.</li>
+          <li>Evaluated models across modalities and patient subgroups with closed-group testing, false-discovery-rate control and benchmarking.</li>
         </ul>
       </div>
     </div>
@@ -281,7 +297,9 @@
       <div>
         <h3>Computational Biology Research Assistant <span class="org">· Röst Lab, University of Toronto</span></h3>
         <ul>
-          <li>Graph Transformer that predicts tandem mass spectra from molecular structures (<a href="https://github.com/yunyicheng/massformer" target="_blank" rel="noopener">massformer</a>), supporting data augmentation for proteomics.</li>
+          <li>Developed a Graph Transformer model (MassFormer) that generates synthetic tandem mass spectra from molecular structures, supporting data augmentation for proteomics.</li>
+          <li>Engineered molecular graph representations and implemented multi-head attention and MLP modules for high-resolution spectral-intensity prediction.</li>
+          <li>Validated predictions against experimental datasets for reliability, robustness and generalization.</li>
         </ul>
       </div>
     </div>
@@ -291,7 +309,8 @@
       <div>
         <h3>Software Engineer <span class="org">· Intel</span></h3>
         <ul>
-          <li>SQL data logic and Power BI dashboards for cross-functional project tracking; evaluated gRPC integration for test-automation systems.</li>
+          <li>Built SQL data logic, reporting tables and Power BI dashboards for cross-functional project tracking and operational decisions.</li>
+          <li>Debugged dashboard performance and evaluated gRPC integration for API-based software-testing and workflow-automation systems.</li>
         </ul>
       </div>
     </div>
@@ -301,7 +320,8 @@
       <div>
         <h3>Genetics Researcher <span class="org">· ANNB Lab, University of Toronto</span></h3>
         <ul>
-          <li>Optimization pipeline (greedy search + Metropolis–Hastings) for deep-mutational-scanning assembly design, packaged as an <a href="https://github.com/yunyicheng/trex-dad" target="_blank" rel="noopener">R package</a>; contributed to a bioRxiv preprint.</li>
+          <li>Designed a computational optimization pipeline for tile placement and overhang selection in deep-mutational-scanning experiments, increasing on-target reactions while reducing experimental errors.</li>
+          <li>Implemented greedy optimization and Metropolis–Hastings sampling in Python and an R package for reproducible assembly design; contributed to a bioRxiv preprint.</li>
         </ul>
       </div>
     </div>
@@ -323,10 +343,63 @@
     </div>
   </section>
 
+  <section id="projects">
+    <h2>projects</h2>
+    <div class="grid">
+      <div class="card proj">
+        <span class="when">2025 · BMI702</span>
+        <h3>LungLDM</h3>
+        <p class="meta">Conditional latent diffusion · histopathology</p>
+        <p>Generates lung-cancer histopathology images conditioned on GPT-4o-summarized pathology reports, tumor scores and tumor-infiltrating-lymphocyte scores. SSIM ≈ 0.915 against real slides.</p>
+      </div>
+      <div class="card proj">
+        <span class="when">2024 · MIT 6.8701</span>
+        <h3>Pisces</h3>
+        <p class="meta">Graph attention networks · spatial transcriptomics</p>
+        <p>Models cell–cell communication from MERFISH data by joining spatial gene expression with gene-regulatory, protein–protein and ligand–receptor networks.</p>
+      </div>
+      <div class="card proj">
+        <span class="when">2023 – 2024 · Röst Lab</span>
+        <h3>MassFormer</h3>
+        <p class="meta">Graph transformers · mass spectrometry</p>
+        <p>Predicts tandem mass spectra from molecular graphs to augment training data for proteomics models.</p>
+      </div>
+      <div class="card proj">
+        <span class="when">2022 – 2023 · ANNB Lab</span>
+        <h3>T-Rex DAD</h3>
+        <p class="meta">Optimization · deep mutational scanning</p>
+        <p>Pipeline and R package for designing tile-region-exchange mutagenesis libraries with data-optimized assembly design.</p>
+      </div>
+      <div class="card proj">
+        <span class="when">side build · macOS</span>
+        <h3>Paw · 爪印</h3>
+        <p class="meta">JavaScript · desktop pet</p>
+        <p>A minimal desktop pet that keeps an eye on my Codex and Claude usage. Moves slowly on purpose.</p>
+      </div>
+      <div class="card proj">
+        <span class="when">side build · macOS</span>
+        <h3>Tunefloat · 音浮</h3>
+        <p class="meta">Swift · Apple Music</p>
+        <p>A minimal floating-lyrics companion for Apple Music.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>skills</h2>
+    <dl class="skills">
+      <dt>languages &amp; ML</dt><dd>Python · PyTorch · TensorFlow · scikit-learn · NumPy · pandas · R · SQL · C · Swift · TypeScript</dd>
+      <dt>wearable sensing</dt><dd>signal processing · time-series analysis · multivariate sensor data · biomechanics · algorithm validation</dd>
+      <dt>machine learning</dt><dd>deep learning · multimodal learning · graph neural networks · transformers · diffusion models · NLP</dd>
+      <dt>statistics</dt><dd>survival analysis · competing risks · cross-validation · hypothesis testing · FDR control · benchmark design</dd>
+      <dt>data &amp; infra</dt><dd>reproducible ML pipelines · ETL · PostgreSQL · DuckDB · Docker · Git · Linux · HPC/GPU computing</dd>
+    </dl>
+  </section>
+
   <section id="resume">
     <h2>resume</h2>
     <div class="resume-row">
-      <p>The full version, with projects and skills.</p>
+      <p>Everything above, in a printable PDF.</p>
       <a class="chip primary" href="yunyi-cheng-resume.pdf" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 12v6"/><path d="m9 15 3 3 3-3"/></svg>
         Download PDF
@@ -361,11 +434,13 @@
   const enc = [112,114,102,49,110,114,114,111,119,120,114,67,106,113,104,107,102,49,108,124,113,120,124];
   const email = () => String.fromCharCode(...enc.map(c => c - 3).reverse());
   const mailto = () => "mail" + "to:" + email();
+  // Shown as "name [dot] name [at] host [dot] com"; the real address is only built on click.
+  const atdot = () => email().replace("@", " [at] ").replace(/\./g, " [dot] ");
 
   document.querySelectorAll("[data-mail]").forEach(a => {
     a.addEventListener("click", e => { e.preventDefault(); location.href = mailto(); });
   });
-  const reveal = () => document.querySelectorAll("[data-mail-text]").forEach(s => s.textContent = email());
+  const reveal = () => document.querySelectorAll("[data-mail-text]").forEach(s => s.textContent = atdot());
   // Show the address only after a real visitor interacts with the page.
   ["pointermove", "keydown", "touchstart", "scroll"].forEach(ev =>
     window.addEventListener(ev, reveal, { once: true, passive: true }));
@@ -414,6 +489,7 @@
       "  <span class=\"s\">about</span>         short bio",
       "  <span class=\"s\">experience</span>    where I've worked",
       "  <span class=\"s\">education</span>     where I studied",
+      "  <span class=\"s\">projects</span>      things I've built",
       "  <span class=\"s\">resume</span>        open my resume (PDF)",
       "  <span class=\"s\">contact</span>       ways to reach me",
       "  <span class=\"s\">ls</span>, <span class=\"s\">cat</span> &lt;file&gt;",
@@ -429,9 +505,17 @@
       `<span class="m">2026</span>  <span class="b">Harvard Medical School</span>   MMSc, Biomedical Informatics`,
       `<span class="m">2024</span>  <span class="b">University of Toronto</span>    HBSc, Computer Science + Bioinformatics &amp; Comp. Bio`,
     ].join("\n"),
+    projects: () => [
+      ["LungLDM   ", "latent diffusion for lung-cancer histopathology", null],
+      ["Pisces    ", "graph attention nets for cell–cell communication", null],
+      ["MassFormer", "graph transformers for tandem mass spectra", null],
+      ["T-Rex DAD ", "assembly design for deep mutational scanning", null],
+      ["Paw       ", "a minimal macOS desktop pet that tracks AI usage", null],
+      ["Tunefloat ", "floating lyrics for Apple Music", null],
+    ].map(([n, d, h]) => `${h ? link(h, n) : `<span class="b">${esc(n)}</span>`}  ${esc(d)}`).join("\n"),
     resume: () => { window.open("yunyi-cheng-resume.pdf", "_blank", "noopener"); return "opening resume.pdf …"; },
     contact: () => [
-      `email     <a href="#" data-term-mail>${esc(email())}</a>`,
+      `email     <a href="#" data-term-mail>${esc(atdot())}</a>`,
       `linkedin  ${link("https://www.linkedin.com/in/yunyi-cheng/", "linkedin.com/in/yunyi-cheng")}`,
       `github    ${link("https://github.com/yunyicheng", "github.com/yunyicheng")}`,
     ].join("\n"),
@@ -468,7 +552,7 @@
     clear: () => { out.innerHTML = ""; return null; },
     exit: () => { closeTerm(); return null; },
   };
-  const ALIASES = { exp: "experience", work: "experience", edu: "education", cv: "resume", python3: "python", "?": "help", quit: "exit", man: "help" };
+  const ALIASES = { proj: "projects", exp: "experience", work: "experience", edu: "education", cv: "resume", python3: "python", "?": "help", quit: "exit", man: "help" };
   const NAMES = [...Object.keys(cmds), ...Object.keys(ALIASES)];
 
   function print(html) {
@@ -522,7 +606,7 @@
   });
 
   const quick = document.getElementById("quick");
-  ["help", "whoami", "experience", "education", "resume", "contact", "ls", "translate"].forEach(c => {
+  ["help", "whoami", "experience", "education", "projects", "resume", "contact", "ls", "translate"].forEach(c => {
     const b = document.createElement("button");
     b.textContent = c;
     b.addEventListener("click", () => { run(c); input.focus(); });
