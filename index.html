@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Yunyi Cheng</title>
+<meta name="description" content="Yunyi Cheng — algorithm engineer working on wearable sensing, machine learning and biomedical data." />
+<meta property="og:title" content="Yunyi Cheng" />
+<meta property="og:description" content="Algorithm Engineer, Wearable Sensing @ STRIV. HMS MMSc · UofT HBSc." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117'/%3E%3Ctext x='10' y='42' font-family='monospace' font-size='28' font-weight='700' fill='%2336BCF7'%3E&gt;_%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --surface: #ffffff;
+    --text: #1d2125;
+    --muted: #5d6670;
+    --faint: #8a939c;
+    --line: #e6e3dc;
+    --accent: #0a7bb0;
+    --accent-soft: #e3f3fb;
+    --term-bg: #0d1117;
+    --term-line: #30363d;
+    --term-text: #e6edf3;
+    --term-muted: #8b949e;
+    --term-green: #3fb950;
+    --term-blue: #79c0ff;
+    --term-string: #a5d6ff;
+    --term-yellow: #d29922;
+    --term-red: #ff7b72;
+    --serif: "Newsreader", Georgia, serif;
+    --sans: "Inter", system-ui, -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1116;
+      --surface: #151a21;
+      --text: #e6e8eb;
+      --muted: #a2abb5;
+      --faint: #707b86;
+      --line: #252c35;
+      --accent: #36bcf7;
+      --accent-soft: #11293a;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1116;
+    --surface: #151a21;
+    --text: #e6e8eb;
+    --muted: #a2abb5;
+    --faint: #707b86;
+    --line: #252c35;
+    --accent: #36bcf7;
+    --accent-soft: #11293a;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.65 var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+
+  /* top bar */
+  header.bar {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar .wrap { display: flex; align-items: center; gap: 20px; height: 56px; }
+  .logo { font: 600 15px var(--mono); color: var(--text); }
+  .logo span { color: var(--accent); }
+  nav { display: flex; gap: 18px; margin-left: auto; font-size: 14px; }
+  nav a { color: var(--muted); }
+  nav a:hover { color: var(--text); text-decoration: none; }
+  .term-btn {
+    font: 600 13px var(--mono);
+    color: var(--term-text); background: var(--term-bg);
+    border: 1px solid var(--term-line); border-radius: 8px;
+    padding: 5px 10px; cursor: pointer;
+  }
+  .term-btn:hover { border-color: var(--accent); }
+
+  /* hero */
+  .hero { padding: 72px 0 40px; }
+  .prompt { font: 13px var(--mono); color: var(--faint); margin: 0 0 14px; }
+  .prompt b { color: var(--accent); font-weight: 600; }
+  h1 {
+    font: 600 clamp(40px, 7vw, 60px)/1.05 var(--serif);
+    letter-spacing: -0.02em; margin: 0 0 14px;
+  }
+  .role { font-size: 19px; color: var(--muted); margin: 0 0 24px; }
+  .role strong { color: var(--text); font-weight: 600; }
+  .summary { font-size: 17px; max-width: 620px; margin: 0 0 30px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 500 14px var(--sans); color: var(--text);
+    border: 1px solid var(--line); background: var(--surface);
+    border-radius: 999px; padding: 8px 16px; cursor: pointer;
+  }
+  .chip:hover { border-color: var(--accent); text-decoration: none; }
+  .chip.primary { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .chip svg { width: 16px; height: 16px; flex: none; }
+  .hint { margin-top: 28px; font: 13px var(--mono); color: var(--faint); }
+  kbd {
+    font: 12px var(--mono); border: 1px solid var(--line); border-bottom-width: 2px;
+    border-radius: 4px; padding: 1px 6px; background: var(--surface); color: var(--text);
+  }
+
+  /* sections */
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  h2 {
+    font: 600 13px var(--mono); text-transform: lowercase; letter-spacing: 0.02em;
+    color: var(--accent); margin: 0 0 28px;
+  }
+  h2::before { content: "## "; color: var(--faint); }
+
+  .job { display: grid; grid-template-columns: 150px 1fr; gap: 6px 24px; padding-bottom: 28px; }
+  .job:last-child { padding-bottom: 0; }
+  .when { font: 13px/1.9 var(--mono); color: var(--faint); }
+  .job h3 { font: 600 17px/1.4 var(--sans); margin: 0; }
+  .job .org { color: var(--muted); font-weight: 400; }
+  .job ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+  .job li { margin: 4px 0; }
+  .job li::marker { color: var(--faint); }
+
+  .edu { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 18px 20px;
+  }
+  .card .when { display: block; margin-bottom: 6px; }
+  .card h3 { font: 600 17px/1.35 var(--sans); margin: 0 0 4px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .resume-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+  .resume-row p { margin: 0; color: var(--muted); }
+
+  footer { padding: 40px 0 56px; border-top: 1px solid var(--line); font: 12px var(--mono); color: var(--faint); }
+  footer .dna { word-break: break-all; cursor: help; }
+  footer .dna:hover { color: var(--accent); }
+
+  @media (max-width: 620px) {
+    nav { display: none; }
+    .term-btn { margin-left: auto; }
+    .hero { padding-top: 48px; }
+    .job { grid-template-columns: 1fr; gap: 2px; }
+    .edu { grid-template-columns: 1fr; }
+  }
+
+  /* terminal overlay */
+  .overlay {
+    position: fixed; inset: 0; z-index: 50;
+    display: none; align-items: center; justify-content: center;
+    background: rgba(5, 8, 12, 0.6); backdrop-filter: blur(3px); padding: 16px;
+  }
+  .overlay.open { display: flex; }
+  .term {
+    width: min(860px, 100%); height: min(560px, 82vh);
+    display: flex; flex-direction: column;
+    background: var(--term-bg); color: var(--term-text);
+    border: 1px solid var(--term-line); border-radius: 12px;
+    box-shadow: 0 24px 80px rgba(0,0,0,.45);
+    font: 14px/1.55 var(--mono); overflow: hidden;
+  }
+  .term-top {
+    position: relative; height: 36px; flex: none;
+    border-bottom: 1px solid var(--term-line);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--term-muted); font-size: 12px;
+  }
+  .dots { position: absolute; left: 14px; display: flex; gap: 8px; }
+  .dots i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+  .dots i:nth-child(1) { background: #ff5f57; cursor: pointer; }
+  .dots i:nth-child(2) { background: #febc2e; }
+  .dots i:nth-child(3) { background: #28c840; }
+  .term-body { flex: 1; overflow-y: auto; padding: 14px 18px; white-space: pre-wrap; word-break: break-word; }
+  .term-body a { color: var(--term-blue); }
+  .line-in { display: flex; }
+  .line-in input {
+    flex: 1; min-width: 0; background: transparent; border: 0; outline: 0;
+    color: var(--term-text); font: inherit; caret-color: var(--term-text); padding: 0;
+  }
+  .ps1 { white-space: pre; }
+  .g { color: var(--term-green); } .b { color: var(--term-blue); } .m { color: var(--term-muted); }
+  .s { color: var(--term-string); } .y { color: var(--term-yellow); } .r { color: var(--term-red); }
+  .quick {
+    flex: none; display: flex; gap: 8px; overflow-x: auto;
+    padding: 10px 14px; border-top: 1px solid var(--term-line);
+  }
+  .quick button {
+    font: 12px var(--mono); color: var(--term-muted); background: transparent;
+    border: 1px solid var(--term-line); border-radius: 6px; padding: 4px 10px; cursor: pointer; white-space: nowrap;
+  }
+  .quick button:hover { color: var(--term-text); border-color: var(--term-muted); }
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top">yunyi<span>@</span>cheng</a>
+    <nav>
+      <a href="#experience">experience</a>
+      <a href="#education">education</a>
+      <a href="#resume">resume</a>
+    </nav>
+    <button class="term-btn" id="openTerm" title="Open terminal (press `)" aria-label="Open terminal mode">&gt;_</button>
+  </div>
+</header>
+
+<main class="wrap" id="top">
+  <div class="hero">
+    <p class="prompt"><b>$</b> whoami</p>
+    <h1>Yunyi Cheng</h1>
+    <p class="role"><strong>Algorithm Engineer</strong>, Wearable Sensing @ STRIV</p>
+    <p class="summary">
+      I build sensing algorithms, predictive models and data systems for wearable and clinical
+      time-series data — turning messy, open-ended scientific questions into reproducible pipelines
+      and validated features people actually use.
+    </p>
+    <div class="links">
+      <a class="chip primary" href="yunyi-cheng-resume.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 12v6"/><path d="m9 15 3 3 3-3"/></svg>
+        Resume
+      </a>
+      <a class="chip" data-mail href="#" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        <span data-mail-text>Email</span>
+      </a>
+      <a class="chip" href="https://www.linkedin.com/in/yunyi-cheng/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        LinkedIn
+      </a>
+      <a class="chip" href="https://github.com/yunyicheng" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
+        GitHub
+      </a>
+    </div>
+    <p class="hint">psst — press <kbd>`</kbd> or tap <kbd>&gt;_</kbd> for terminal mode.</p>
+  </div>
+
+  <section id="experience">
+    <h2>experience</h2>
+
+    <div class="job">
+      <div class="when">Aug 2026 – now</div>
+      <div>
+        <h3>Algorithm Engineer, Wearable Sensing <span class="org">· STRIV</span></h3>
+        <ul>
+          <li>Signal-processing, statistical and machine-learning methods that turn multivariate pressure and motion time series into running metrics and insights.</li>
+          <li>Own the algorithm lifecycle — from exploratory analysis and offline validation to backend implementation and production monitoring.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">Feb 2025 – Jul 2026</div>
+      <div>
+        <h3>Machine Learning Researcher <span class="org">· Beth Israel Deaconess Medical Center</span></h3>
+        <ul>
+          <li>Multimodal risk-stratification models combining EEG features, imaging, clinical variables and clinical notes, improving enrichment for anti-epileptogenic drug-trial enrollment by ~50% over random selection.</li>
+          <li>Survival and competing-risks workflows in R and Python; NLP over clinical notes for cohort construction.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">May 2023 – Jun 2024</div>
+      <div>
+        <h3>Computational Biology Research Assistant <span class="org">· Röst Lab, University of Toronto</span></h3>
+        <ul>
+          <li>Graph Transformer that predicts tandem mass spectra from molecular structures (<a href="https://github.com/yunyicheng/massformer" target="_blank" rel="noopener">massformer</a>), supporting data augmentation for proteomics.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">Jul 2022 – Sep 2023</div>
+      <div>
+        <h3>Software Engineer <span class="org">· Intel</span></h3>
+        <ul>
+          <li>SQL data logic and Power BI dashboards for cross-functional project tracking; evaluated gRPC integration for test-automation systems.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job">
+      <div class="when">May 2022 – May 2023</div>
+      <div>
+        <h3>Genetics Researcher <span class="org">· ANNB Lab, University of Toronto</span></h3>
+        <ul>
+          <li>Optimization pipeline (greedy search + Metropolis–Hastings) for deep-mutational-scanning assembly design, packaged as an <a href="https://github.com/yunyicheng/trex-dad" target="_blank" rel="noopener">R package</a>; contributed to a bioRxiv preprint.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>education</h2>
+    <div class="edu">
+      <div class="card">
+        <span class="when">class of 2026</span>
+        <h3>Harvard Medical School</h3>
+        <p>MMSc, Biomedical Informatics</p>
+      </div>
+      <div class="card">
+        <span class="when">class of 2024</span>
+        <h3>University of Toronto</h3>
+        <p>HBSc, Computer Science and Bioinformatics &amp; Computational Biology</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="resume">
+    <h2>resume</h2>
+    <div class="resume-row">
+      <p>The full version, with projects and skills.</p>
+      <a class="chip primary" href="yunyi-cheng-resume.pdf" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 12v6"/><path d="m9 15 3 3 3-3"/></svg>
+        Download PDF
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Yunyi Cheng · hand-written HTML, no frameworks harmed</div>
+    <div class="dna" title="hint: ATG = start, TAA = stop">5′-ATGGAGTGGCATGCTGTGGAAGCCAACATCTGCGAGGATGCTTACTAA-3′</div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Terminal">
+  <div class="term">
+    <div class="term-top">
+      <div class="dots"><i id="closeTerm" title="close"></i><i></i><i></i></div>
+      yunyi@cheng: ~ — yunyi-sh
+    </div>
+    <div class="term-body" id="out"></div>
+    <div class="quick" id="quick"></div>
+  </div>
+</div>
+
+<noscript><p class="wrap" style="font:13px monospace">email: yunyi [dot] cheng [at] outlook [dot] com</p></noscript>
+
+<script>
+(() => {
+  // Email is stored shifted and reversed so it never appears as plain text in the HTML.
+  const enc = [112,114,102,49,110,114,114,111,119,120,114,67,106,113,104,107,102,49,108,124,113,120,124];
+  const email = () => String.fromCharCode(...enc.map(c => c - 3).reverse());
+  const mailto = () => "mail" + "to:" + email();
+
+  document.querySelectorAll("[data-mail]").forEach(a => {
+    a.addEventListener("click", e => { e.preventDefault(); location.href = mailto(); });
+  });
+  const reveal = () => document.querySelectorAll("[data-mail-text]").forEach(s => s.textContent = email());
+  // Show the address only after a real visitor interacts with the page.
+  ["pointermove", "keydown", "touchstart", "scroll"].forEach(ev =>
+    window.addEventListener(ev, reveal, { once: true, passive: true }));
+
+  /* ---------- terminal ---------- */
+  const overlay = document.getElementById("overlay");
+  const out = document.getElementById("out");
+  const PS1 = '<span class="g">yunyi@cheng</span>:<span class="b">~</span>$ ';
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const link = (href, text) => `<a href="${href}" target="_blank" rel="noopener">${esc(text)}</a>`;
+
+  const SEQ = "ATGGAGTGGCATGCTGTGGAAGCCAACATCTGCGAGGATGCTTACTAA";
+  const CODONS = (() => {
+    const b = "TCAG", aa = "FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG", t = {};
+    let n = 0;
+    for (const x of b) for (const y of b) for (const z of b) t[x + y + z] = aa[n++];
+    return t;
+  })();
+
+  const EXPERIENCE = [
+    ["Aug 2026 – now     ", "Algorithm Engineer, Wearable Sensing", "STRIV"],
+    ["Feb 2025 – Jul 2026", "Machine Learning Researcher", "Beth Israel Deaconess Medical Center"],
+    ["May 2023 – Jun 2024", "Computational Biology RA", "Röst Lab, UofT"],
+    ["Jul 2022 – Sep 2023", "Software Engineer", "Intel"],
+    ["May 2022 – May 2023", "Genetics Researcher", "ANNB Lab, UofT"],
+  ];
+
+  let sneezes = 0;
+  const history = [];
+  let hIdx = 0;
+
+  const FILES = {
+    "about.txt": () => cmds.about(),
+    "experience.log": () => cmds.experience(),
+    "education.md": () => cmds.education(),
+    "easter_egg.fasta": () => `<span class="m">&gt;yunyi|cds|translate_me</span>\n${SEQ}\n<span class="m">try: translate</span>`,
+    ".cats": () => "🐈 🐈\n<span class=\"y\">roommates: 2 · allergic: yes · regrets: 0</span>",
+    "resume.pdf": () => `resume.pdf: binary data. try <span class="s">resume</span>`,
+  };
+
+  const cmds = {
+    help: () => [
+      "available commands:",
+      "",
+      "  <span class=\"s\">whoami</span>        who is this",
+      "  <span class=\"s\">about</span>         short bio",
+      "  <span class=\"s\">experience</span>    where I've worked",
+      "  <span class=\"s\">education</span>     where I studied",
+      "  <span class=\"s\">resume</span>        open my resume (PDF)",
+      "  <span class=\"s\">contact</span>       ways to reach me",
+      "  <span class=\"s\">ls</span>, <span class=\"s\">cat</span> &lt;file&gt;",
+      "  <span class=\"s\">translate</span> [dna] DNA → protein",
+      "  <span class=\"s\">clear</span>, <span class=\"s\">exit</span>",
+      "",
+      "<span class=\"m\">there may be a few undocumented ones.</span>",
+    ].join("\n"),
+    whoami: () => "yunyi cheng — algorithm engineer, wearable sensing @ STRIV",
+    about: () => "I build sensing algorithms, predictive models and data systems for wearable\nand clinical time-series data. Before that: clinical ML at BIDMC, graph\ntransformers for mass spec at UofT, and a stint as a software engineer at Intel.",
+    experience: () => EXPERIENCE.map(([d, r, o]) => `<span class="m">${d}</span>  ${esc(r)} <span class="m">@</span> <span class="b">${esc(o)}</span>`).join("\n"),
+    education: () => [
+      `<span class="m">2026</span>  <span class="b">Harvard Medical School</span>   MMSc, Biomedical Informatics`,
+      `<span class="m">2024</span>  <span class="b">University of Toronto</span>    HBSc, Computer Science + Bioinformatics &amp; Comp. Bio`,
+    ].join("\n"),
+    resume: () => { window.open("yunyi-cheng-resume.pdf", "_blank", "noopener"); return "opening resume.pdf …"; },
+    contact: () => [
+      `email     <a href="#" data-term-mail>${esc(email())}</a>`,
+      `linkedin  ${link("https://www.linkedin.com/in/yunyi-cheng/", "linkedin.com/in/yunyi-cheng")}`,
+      `github    ${link("https://github.com/yunyicheng", "github.com/yunyicheng")}`,
+    ].join("\n"),
+    ls: args => (args.includes("-a") || args.includes("-la"))
+      ? Object.keys(FILES).sort().join("  ")
+      : Object.keys(FILES).filter(f => !f.startsWith(".")).join("  "),
+    cat: args => {
+      if (!args.length) return "usage: cat &lt;file&gt;";
+      const f = FILES[args[0]];
+      return f ? f() : `cat: ${esc(args[0])}: No such file or directory`;
+    },
+    translate: args => {
+      const seq = (args[0] || SEQ).toUpperCase();
+      if (!/^[ACGT]+$/.test(seq)) return '<span class="r">translate: expected a DNA sequence (A/C/G/T)</span>';
+      let p = "";
+      for (let i = 0; i + 3 <= seq.length; i += 3) p += CODONS[seq.slice(i, i + 3)];
+      return args[0] ? p : `${p}\n<span class="m">mew, have a nice day 🐈</span>`;
+    },
+    open: args => {
+      const t = { linkedin: "https://www.linkedin.com/in/yunyi-cheng/", github: "https://github.com/yunyicheng", resume: "yunyi-cheng-resume.pdf" }[args[0]];
+      if (args[0] === "email" || args[0] === "mail") { location.href = mailto(); return "opening mail client …"; }
+      if (!t) return "usage: open linkedin | github | resume | email";
+      window.open(t, "_blank", "noopener");
+      return `opening ${esc(args[0])} …`;
+    },
+    python: () => `Python 3.14 (yunyi-sh)\n&gt;&gt;&gt; me = Yunyi()\n<span class="y">UserWarning: AllergenExposure: living with 2 cats anyway 🤧</span>\n&gt;&gt;&gt; exit()`,
+    pet: () => `😺 purrr … <span class="y">achoo!</span>  <span class="m">(allergen exposure: ${++sneezes})</span>`,
+    sudo: () => '<span class="r">yunyi is not in the sudoers file. This incident will be reported to the cats.</span>',
+    rm: () => '<span class="r">rm: permission denied.</span> nice try.',
+    echo: args => esc(args.join(" ")),
+    date: () => new Date().toString(),
+    history: () => history.map((h, i) => `${String(i + 1).padStart(4)}  ${esc(h)}`).join("\n"),
+    coffee: () => "☕ brewing … done. productivity +10%",
+    clear: () => { out.innerHTML = ""; return null; },
+    exit: () => { closeTerm(); return null; },
+  };
+  const ALIASES = { exp: "experience", work: "experience", edu: "education", cv: "resume", python3: "python", "?": "help", quit: "exit", man: "help" };
+  const NAMES = [...Object.keys(cmds), ...Object.keys(ALIASES)];
+
+  function print(html) {
+    if (html == null) return;
+    const div = document.createElement("div");
+    div.innerHTML = html;
+    out.insertBefore(div, inputLine);
+  }
+
+  function run(raw) {
+    const line = raw.trim();
+    print(PS1 + esc(raw));
+    if (!line) return;
+    history.push(line); hIdx = history.length;
+    const [name, ...args] = line.split(/\s+/);
+    const key = ALIASES[name] || name;
+    const fn = cmds[key];
+    print(fn ? fn(args) : `yunyi-sh: command not found: ${esc(name)} <span class="m">(try help)</span>`);
+    out.scrollTop = out.scrollHeight;
+  }
+
+  // the live input line
+  const inputLine = document.createElement("div");
+  inputLine.className = "line-in";
+  inputLine.innerHTML = `<span class="ps1">${PS1}</span>`;
+  const input = document.createElement("input");
+  input.setAttribute("aria-label", "terminal input");
+  input.autocomplete = "off"; input.autocapitalize = "off"; input.spellcheck = false;
+  inputLine.appendChild(input);
+  out.appendChild(inputLine);
+
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") { run(input.value); input.value = ""; }
+    else if (e.key === "ArrowUp") { if (hIdx > 0) input.value = history[--hIdx]; e.preventDefault(); }
+    else if (e.key === "ArrowDown") { hIdx = Math.min(history.length, hIdx + 1); input.value = history[hIdx] || ""; e.preventDefault(); }
+    else if (e.key === "Tab") {
+      e.preventDefault();
+      const parts = input.value.split(" ");
+      const pool = parts.length > 1 ? Object.keys(FILES) : NAMES;
+      const hits = pool.filter(n => n.startsWith(parts[parts.length - 1]));
+      if (hits.length === 1) { parts[parts.length - 1] = hits[0]; input.value = parts.join(" ") + (parts.length === 1 ? " " : ""); }
+      else if (hits.length > 1) { print(PS1 + esc(input.value)); print(hits.join("  ")); }
+    }
+    else if (e.key === "l" && e.ctrlKey) { e.preventDefault(); cmds.clear(); }
+  });
+
+  out.addEventListener("click", e => {
+    const m = e.target.closest("[data-term-mail]");
+    if (m) { e.preventDefault(); location.href = mailto(); return; }
+    if (!window.getSelection().toString()) input.focus();
+  });
+
+  const quick = document.getElementById("quick");
+  ["help", "whoami", "experience", "education", "resume", "contact", "ls", "translate"].forEach(c => {
+    const b = document.createElement("button");
+    b.textContent = c;
+    b.addEventListener("click", () => { run(c); input.focus(); });
+    quick.appendChild(b);
+  });
+
+  let booted = false;
+  function openTerm() {
+    overlay.classList.add("open");
+    if (!booted) {
+      booted = true;
+      print('<span class="m">yunyi-sh 1.0 — type</span> <span class="s">help</span> <span class="m">to list commands,</span> <span class="s">esc</span> <span class="m">to leave.</span>\n');
+    }
+    setTimeout(() => input.focus(), 0);
+  }
+  function closeTerm() { overlay.classList.remove("open"); }
+
+  document.getElementById("openTerm").addEventListener("click", openTerm);
+  document.getElementById("closeTerm").addEventListener("click", closeTerm);
+  overlay.addEventListener("click", e => { if (e.target === overlay) closeTerm(); });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && overlay.classList.contains("open")) closeTerm();
+    else if (e.key === "`" && !overlay.classList.contains("open") && !/input|textarea/i.test(document.activeElement.tagName)) {
+      e.preventDefault(); openTerm();
+    }
+  });
+})();
+</script>
+</body>
+</html>
