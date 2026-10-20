@@ -370,18 +370,6 @@
         <p class="meta">Optimization · deep mutational scanning</p>
         <p>Pipeline and R package for designing tile-region-exchange mutagenesis libraries with data-optimized assembly design.</p>
       </div>
-      <div class="card proj">
-        <span class="when">side build · macOS</span>
-        <h3>Paw · 爪印</h3>
-        <p class="meta">JavaScript · desktop pet</p>
-        <p>A minimal desktop pet that keeps an eye on my Codex and Claude usage. Moves slowly on purpose.</p>
-      </div>
-      <div class="card proj">
-        <span class="when">side build · macOS</span>
-        <h3>Tunefloat · 音浮</h3>
-        <p class="meta">Swift · Apple Music</p>
-        <p>A minimal floating-lyrics companion for Apple Music.</p>
-      </div>
     </div>
   </section>
 
@@ -510,8 +498,6 @@
       ["Pisces    ", "graph attention nets for cell–cell communication", null],
       ["MassFormer", "graph transformers for tandem mass spectra", null],
       ["T-Rex DAD ", "assembly design for deep mutational scanning", null],
-      ["Paw       ", "a minimal macOS desktop pet that tracks AI usage", null],
-      ["Tunefloat ", "floating lyrics for Apple Music", null],
     ].map(([n, d, h]) => `${h ? link(h, n) : `<span class="b">${esc(n)}</span>`}  ${esc(d)}`).join("\n"),
     resume: () => { window.open("yunyi-cheng-resume.pdf", "_blank", "noopener"); return "opening resume.pdf …"; },
     contact: () => [
