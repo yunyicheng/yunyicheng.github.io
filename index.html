@@ -4,10 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Yunyi Cheng</title>
-<meta name="description" content="Yunyi Cheng — algorithm engineer working on wearable sensing, machine learning and biomedical data." />
+<meta name="description" content="Yunyi Cheng — data scientist and machine learning engineer working on clinical and wearable time-series data." />
 <meta property="og:title" content="Yunyi Cheng" />
 <meta property="og:image" content="https://yunyicheng.github.io/avatar.jpg" />
-<meta property="og:description" content="Algorithm Engineer, Wearable Sensing @ STRIV. HMS MMSc · UofT HBSc." />
+<meta property="og:description" content="Data Scientist &amp; ML Engineer, currently Algorithm Engineer @ STRIV. HMS MMSc · UofT HBSc." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1117'/%3E%3Ctext x='10' y='42' font-family='monospace' font-size='28' font-weight='700' fill='%2336BCF7'%3E&gt;_%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -109,6 +109,7 @@
   }
   .role { font-size: 19px; color: var(--muted); margin: 0 0 24px; }
   .role strong { color: var(--text); font-weight: 600; }
+  .role .now { display: block; font-size: 15px; margin-top: 4px; }
   .summary { font-size: 17px; max-width: 620px; margin: 0 0 30px; }
   .links { display: flex; flex-wrap: wrap; gap: 10px; }
   .chip {
@@ -248,14 +249,14 @@
       <div>
         <p class="prompt"><b>$</b> whoami</p>
         <h1>Yunyi Cheng</h1>
-        <p class="role"><strong>Algorithm Engineer</strong>, Wearable Sensing @ STRIV</p>
+        <p class="role"><strong>Data Scientist &amp; ML Engineer</strong><span class="now">currently Algorithm Engineer @ STRIV</span></p>
       </div>
       <img class="avatar" src="avatar.jpg" width="136" height="136" alt="Yunyi's avatar: a bunny with a pencil in its mouth" />
     </div>
     <p class="summary">
-      I build sensing algorithms, predictive models and data systems for wearable and clinical
-      time-series data — turning messy, open-ended scientific questions into reproducible pipelines
-      and validated features people actually use.
+      I build statistical and machine-learning models for clinical and wearable time-series data —
+      from clinical-trial enrichment models at BIDMC to production algorithms at STRIV — with
+      reproducible pipelines and rigorous validation.
     </p>
     <div class="links">
       <a class="chip primary" href="yunyi-cheng-resume.pdf" target="_blank" rel="noopener">
@@ -391,11 +392,12 @@
   <section id="skills">
     <h2>skills</h2>
     <dl class="skills">
-      <dt>languages &amp; ML</dt><dd>Python · PyTorch · TensorFlow · scikit-learn · NumPy · pandas · R · SQL · C · Swift · TypeScript</dd>
-      <dt>wearable sensing</dt><dd>signal processing · time-series analysis · multivariate sensor data · biomechanics · algorithm validation</dd>
-      <dt>machine learning</dt><dd>deep learning · multimodal learning · graph neural networks · transformers · diffusion models · NLP</dd>
-      <dt>statistics</dt><dd>survival analysis · competing risks · cross-validation · hypothesis testing · FDR control · benchmark design</dd>
-      <dt>data &amp; infra</dt><dd>reproducible ML pipelines · ETL · PostgreSQL · DuckDB · Docker · Git · Linux · HPC/GPU computing</dd>
+      <dt>statistics</dt><dd>survival analysis · competing risks (Fine-Gray) · trial enrichment · experimental design · simulation studies · MCMC · hypothesis testing · FDR control</dd>
+      <dt>clinical data</dt><dd>EHR · ICD-10 · clinical notes (NLP) · EEG · medical imaging · cohort construction</dd>
+      <dt>machine learning</dt><dd>predictive modeling · deep learning · multimodal learning · graph neural networks · transformers · diffusion models · LLM applications</dd>
+      <dt>time series &amp; sensing</dt><dd>signal processing · multivariate sensor data · biomechanics · algorithm validation</dd>
+      <dt>languages &amp; tools</dt><dd>Python · PyTorch · TensorFlow · scikit-learn · XGBoost · NumPy · pandas · R · SQL · C · Swift · TypeScript</dd>
+      <dt>data &amp; infra</dt><dd>reproducible ML pipelines · ETL · PostgreSQL · DuckDB · Docker · Git · CI/CD · pytest · Claude Code · Codex · Linux · HPC/GPU computing</dd>
     </dl>
   </section>
 
@@ -501,8 +503,8 @@
       "",
       "<span class=\"m\">there may be a few undocumented ones.</span>",
     ].join("\n"),
-    whoami: () => "yunyi cheng — algorithm engineer, wearable sensing @ STRIV",
-    about: () => "I build sensing algorithms, predictive models and data systems for wearable\nand clinical time-series data. Before that: clinical ML at BIDMC, graph\ntransformers for mass spec at UofT, and a stint as a software engineer at Intel.",
+    whoami: () => "yunyi cheng — data scientist & ML engineer, currently algorithm engineer @ STRIV",
+    about: () => "I build statistical and machine-learning models for clinical and wearable\ntime-series data. Now: production algorithms at STRIV. Before that: clinical\nML at BIDMC, graph transformers for mass spec at UofT, and a stint as a\nsoftware engineer at Intel.",
     experience: () => EXPERIENCE.map(([d, r, o]) => `<span class="m">${d}</span>  ${esc(r)} <span class="m">@</span> <span class="b">${esc(o)}</span>`).join("\n"),
     education: () => [
       `<span class="m">2026</span>  <span class="b">Harvard Medical School</span>   MMSc, Biomedical Informatics`,
